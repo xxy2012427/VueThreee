@@ -1,0 +1,9 @@
+[data-theme="default"]{
+    --testColor:pink;
+    --testImg:url("src/assets/images/logo1.png");
+    --el_button:red !important;
+}
+[data-theme="primary"]{
+    --testColor:#fff;
+    --otherStyle:#000;
+}
