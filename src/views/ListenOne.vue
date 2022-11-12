@@ -38,6 +38,7 @@
         },
         methods: {
             startPlay() {
+                this.$refs.audio.volume = 0.2;
                 this.$refs.audio.play()
             },
             pausePlay() {

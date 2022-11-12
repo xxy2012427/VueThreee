@@ -32,6 +32,16 @@ const router = createRouter({
       name: 'dialogOne',
       component: () => import('../views/DialogEveryDay.vue')
     },
+    {
+      path: '/pushing',
+      name: 'Pushing',
+      component: () => import('../views/Pushing.vue')
+    },
+    {
+      path: '/smkmonitor1',
+      name: 'SmkMonitor1',
+      component: () => import('../views/SmkMonitor1.vue')
+    },
   ]
 })
 

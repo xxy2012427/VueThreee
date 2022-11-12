@@ -19,8 +19,9 @@ import ListenOne from './views/ListenOne.vue'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/music">music</RouterLink>
-        <RouterLink to="/listen">listen</RouterLink>
+        <RouterLink to="/pushing">pushing</RouterLink>
         <RouterLink to="/dialogOne">每日提示</RouterLink>
+        <RouterLink to="/smkmonitor1">数据展示</RouterLink>
       </nav>
     </div>
   </header>
