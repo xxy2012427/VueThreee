@@ -1,6 +1,8 @@
 <template>
     <div class="Pushing" ref="PushingRef">
-        <h1>{{time}}</h1>
+        <p v-show="showTime">
+            <h1>{{time}}</h1>
+        </p>
         <p v-show="showAudio">
             <audio controls ref="audioTime"  class="audT">
                 <source src="../assets/audios/TimeStop.mp3" />
@@ -11,7 +13,7 @@
             <span>{{ publishedBooksMessage }}</span>
             <span>{{ author.books[0] }}</span>
         </p>
-        <div :style="styleObject">13</div>
+        <div :style="styleObject">colour</div>
         <van-button hairline round color="linear-gradient(to right, #24EBFA, #3E1CFA)" type="primary" @click="changeStyle">换色</van-button>
         <van-button hairline round color="linear-gradient(to right, #24EBFA, #3E1CFA)" type="primary" @click="showAll">{{showAllText}}</van-button>
     </div>
@@ -22,6 +24,7 @@
         name: "Pushing",
         data() {
             return {
+                showTime:false,
                 showAudio:false,
                 show2:false,
                 showFlag:false,
@@ -70,6 +73,7 @@
                 }
             },
             clock(){
+                this.showTime=true;
                 var d=new Date();
                 const t=d.toLocaleTimeString();
                 this.time=t;

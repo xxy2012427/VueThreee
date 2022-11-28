@@ -42,6 +42,16 @@ const router = createRouter({
       name: 'SmkMonitor1',
       component: () => import('../views/SmkMonitor1.vue')
     },
+    {
+      path: '/cloud/one',
+      name: 'cloudshow',
+      component: () => import('../views/Echarts/CloudShow.vue')
+    },
+    {
+      path: '/map/one',
+      name: 'Tcmap',
+      component: () => import('../views/Echarts/Tcmap.vue')
+    },
   ]
 })
 

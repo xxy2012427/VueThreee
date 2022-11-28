@@ -1,9 +1,11 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import AboutView from './views/AboutView.vue'
-import MusicView from './views/Music.vue'
-import ListenOne from './views/ListenOne.vue'
+  import { RouterLink, RouterView } from 'vue-router'
+  import HelloWorld from './components/HelloWorld.vue'
+  import AboutView from './views/AboutView.vue'
+  import MusicView from './views/Music.vue'
+  import ListenOne from './views/ListenOne.vue'
+  import CloudShow from './views/Echarts/CloudShow.vue'
+
 </script>
 
 <template>
@@ -11,17 +13,21 @@ import ListenOne from './views/ListenOne.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo1.png" width="115" height="115" />
 
 
-
+    <p v-show="showTime=false">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/music">music</RouterLink>
+    </p>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/music">music</RouterLink>
+
         <RouterLink to="/pushing">pushing</RouterLink>
         <RouterLink to="/dialogOne">每日提示</RouterLink>
         <RouterLink to="/smkmonitor1">数据展示</RouterLink>
+        <RouterLink to="/cloud/one">云</RouterLink>
+        <RouterLink to="/map/one">苏州地图</RouterLink>
       </nav>
     </div>
   </header>

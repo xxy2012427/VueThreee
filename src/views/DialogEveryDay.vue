@@ -1,24 +1,23 @@
 <template>
-    <div class="DialogEveryDay" ref="ref1">
-        <van-button  hairline round color="linear-gradient(to right, #ff6034, #ee0a24)" type="primary" @click="Dia1">生活</van-button>
+    <div class="DialogEveryDay" @contextmenu.prevent ref="ref1">
+        <van-button  hairline round color="linear-gradient(to right, #ff6034, #ee0a24)" type="primary" @click.once="Dia1">生活</van-button>
         <van-button  hairline round color="linear-gradient(to right, #24EBFA, #3E1CFA)" type="primary" @click="Dia2">睡眠</van-button>
-        <van-button  hairline round color="linear-gradient(to right, #A5FAA7, #24B92B)" type="primary" @click="Dia3">交互</van-button>
-        <van-button  hairline round color="linear-gradient(to right, #FA8DE5, #E61AFA)" type="primary" @click="Dia4">踏青</van-button>
+        <van-button  hairline round color="linear-gradient(to right, #A5FAA7, #24B92B)" type="primary" @click.right="Dia3">交互</van-button>
+        <van-button  hairline round color="linear-gradient(to right, #FA8DE5, #E61AFA)" type="primary" @click.space="Dia4">踏青</van-button>
         <swiper class="mySwiper" :modules="modules" :pagination="{ clickable:true }">
             <swiper-slide>
               <img src="../assets/images/swiper/lbt1.png" alt="">
             </swiper-slide>
             <swiper-slide>
-                <img src="../assets/images/swiper/lbt2.png" alt="">
+                <img src="../assets/images/swiper/R00.png" alt="">
             </swiper-slide>
             <swiper-slide>
-                <img src="../assets/images/swiper/lbt4.png" alt="">
+                <img src="../assets/images/swiper/R01.png" alt="">
             </swiper-slide>
             <swiper-slide>
                 <img src="../assets/images/swiper/lbt5.png" alt="">
             </swiper-slide>
         </swiper>
-
 
 
     </div>
@@ -32,7 +31,8 @@
     import { Pagination } from 'swiper';
     import 'swiper/css';
     import 'swiper/css/pagination';
-    Dialog({ message: '小助手启动' });
+    import * as echarts from 'echarts';
+    //Dialog({ message: '小助手启动' });
     export default {
         name: "DialogEveryDay",
         components: {
@@ -85,6 +85,13 @@
                     // on close
                 });
             },
+            ShowCloud(){
+                const main = this.$refs.CloudRef;
+                const myChart = echarts.init(main);
+
+
+
+            }
         },
     }
 </script>

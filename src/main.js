@@ -17,6 +17,7 @@ import './assets/main.css'
 import "./assets/theme/index.css"
 import '@/assets/iconfont/iconfont.css'
 import 'vant/es/dialog/style'
+import * as echarts from 'echarts';
 
 const app = createApp(App);
 
@@ -39,4 +40,5 @@ app.use(ActionBarButton);
 app.use(Col);
 app.use(Row);app.use(Dialog);
 app.use(Toast);
+app.config.globalProperties.$echarts = echarts;
 app.mount('#app');
