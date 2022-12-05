@@ -13,11 +13,15 @@ import { ActionBar, ActionBarIcon, ActionBarButton } from 'vant';
 import { Col, Row } from 'vant';
 import { Dialog } from 'vant';
 import { Toast } from 'vant';
+import { Overlay } from 'vant';
+import { ConfigProvider,Lazyload } from 'vant';
+
 import './assets/main.css'
 import "./assets/theme/index.css"
 import '@/assets/iconfont/iconfont.css'
 import 'vant/es/dialog/style'
 import * as echarts from 'echarts';
+
 
 const app = createApp(App);
 
@@ -40,5 +44,10 @@ app.use(ActionBarButton);
 app.use(Col);
 app.use(Row);app.use(Dialog);
 app.use(Toast);
+app.use(Overlay);
+app.use(ConfigProvider);
+app.use(Lazyload, {
+    lazyComponent: true,
+});
 app.config.globalProperties.$echarts = echarts;
 app.mount('#app');

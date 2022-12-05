@@ -4,11 +4,10 @@
 
         <p v-show="showflag">
             <button @click="postInfo">实时交易更新</button>
-            <a>{{msg2}}</a>
             <li v-for="(value, key, index) in mymonitor1">
                 {{ key }}: {{ value }}
             </li>
-        </p>
+         </p>
 
         <div ref="EcharRef" id="e1" style="width: 600px;height:400px;"></div>
         <div ref="EcharStackedLine" id="e2" style="width: 700px;height:400px;"></div>
@@ -25,7 +24,7 @@
         data () {
             return{
                 showflag:false,
-                msg2:0,
+                loadingflag:false,
                 mymonitor1:{
                     脱机:10000,
                     一卡通:200,
@@ -35,28 +34,36 @@
                 },
                 monlist1:[0,0,0,0,0],
                 monlist2:[0,0,0,0,0],
-                mon3list1:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                mon3list2:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                mon3list3:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                product:['product', '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                mon3list1:['脱机', '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                mon3list2:['0',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                mon3list3:['0',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
             }
         },
         mounted() {
             this.showorders();
             this.postInfo();
             this.postInfo2();
+            this.loadingflag=true;
             this.postInfo3();
-            //this.showstckedline();
-            console.log('1')
             this.timeInter = setInterval(() => {
                 this.postInfo()  // methods里的方法
             }, 60000)
         },
         methods: {
             postInfo() {
+                if(!this.loadingflag){
+                    //console.log('loadingToast')
+                    this.$toast.loading({
+                       message: '自定义图片',
+                        duration: 20000,
+                       icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
+                    });
+                }
                 axios.post('/api/monitor1').then((res) => {
-                    //console.log(res.data)
-                    this.msg2=res.data;
-                    //console.log(res.data.data.v1)
+                    if (res.data.code === 200) {
+                        console.log("成功-清除加载");
+                    }
                     this.monlist1[0]=res.data.data.v1;
                     this.monlist1[1]=res.data.data.v2;
                     this.monlist1[2]=res.data.data.v3;
@@ -73,6 +80,7 @@
                     this.monlist2[3]=res.data.data.v4;
                     this.monlist2[4]=res.data.data.v5;
                     this.showorders();
+                    this.$toast.clear();
                 })
             },
             postInfo3() {
@@ -80,6 +88,7 @@
                     this.mon3list1=res.data.data.list1;
                     this.mon3list2=res.data.data.list2;
                     this.mon3list3=res.data.data.list3;
+                    //console.log(this.mon3list1);
                     this.showstckedline();
                 })
             },
@@ -134,64 +143,100 @@
                 option && myChart.setOption(option);
             },
             showstckedline(){
+
                 const main2 = this.$refs.EcharStackedLine;
                 var myChart2 = echarts.init(main2);
                 var option2;
-
-                option2 = {
-                    title: {
-                        text: '上月交易量'
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        //data: ['刷卡交易', '市民卡App', '银联云闪付', '苏周到App', '支付宝扫码']
-                        data: ['刷卡交易', '市民卡App', '支付宝扫码']
-                    },
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    toolbox: {
-                        feature: {
-                            saveAsImage: {}
-                        }
-                    },
-                    xAxis: {
-                        type: 'category',
-                        boundaryGap: false,
-                        //data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                        data: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [
-                        {
-                            name: '刷卡交易',
-                            type: 'line',
-                            stack: 'Total',
-                            data: this.mon3list1
+                var seriesData=[];
+                seriesData.push(this.product);
+                seriesData.push(this.mon3list1);
+                seriesData.push(this.mon3list2);
+                seriesData.push(this.mon3list3);
+                //console.log(seriesData)
+                setTimeout(function () {
+                    option2 = {
+                        legend: {},
+                        tooltip: {
+                            trigger: 'axis',
+                            showContent: false
                         },
-                        {
-                            name: '市民卡App',
-                            type: 'line',
-                            data: this.mon3list2
+                        dataset: {
+                            source:
+                            seriesData,
+                                /*[//this.product,
+                                ['product', '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                                //this.mon3list1,
+                                ['刷卡交易', '4','22','4','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                                ['市民卡App','18','23','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
+                                ['支付宝扫码','3','12','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+                            ]*/
                         },
-                        {
-                            name: '支付宝扫码',
-                            type: 'line',
-                            data: this.mon3list3
+                        xAxis: { type: 'category' },
+                        yAxis: { gridIndex: 0 },
+                        grid: { top: '55%' },
+                        series: [
+                            {
+                                type: 'line',
+                                smooth: true,
+                                seriesLayoutBy: 'row',
+                                emphasis: { focus: 'series' }
+                            },
+                            {
+                                type: 'line',
+                                smooth: true,
+                                seriesLayoutBy: 'row',
+                                emphasis: { focus: 'series' }
+                            },
+                            {
+                                type: 'line',
+                                smooth: true,
+                                seriesLayoutBy: 'row',
+                                emphasis: { focus: 'series' }
+                            },
+                            {
+                                type: 'pie',
+                                id: 'pie',
+                                radius: '30%',
+                                center: ['50%', '25%'],
+                                emphasis: {
+                                    focus: 'self'
+                                },
+                                label: {
+                                    formatter: '{b}: {@1} ({d}%)'
+                                },
+                                encode: {
+                                    itemName: 'product',
+                                    value: '1',
+                                    tooltip: '1'
+                                }
+                            }
+                        ]
+                    };
+                    myChart2.on('updateAxisPointer', function (event) {
+                        const xAxisInfo = event.axesInfo[0];
+                        if (xAxisInfo) {
+                            const dimension = xAxisInfo.value + 1;
+                            myChart2.setOption({
+                                series: {
+                                    id: 'pie',
+                                    label: {
+                                        formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                                    },
+                                    encode: {
+                                        value: dimension,
+                                        tooltip: dimension
+                                    }
+                                }
+                            });
                         }
-                    ]
-                };
+                    });
+                    myChart2.setOption(option2);
+                });
 
                 option2 && myChart2.setOption(option2);
 
-            }
+            },
+
 
 
         },
@@ -199,7 +244,8 @@
             console.log('定时器释放:', this.timeInter)
             clearInterval(this.timeInter);
             // this.stopColor()
-            this.timeInter = null
+            this.timeInter = null;
+            this.$toast.clear();
         },
     }
 

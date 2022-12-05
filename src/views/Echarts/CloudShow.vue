@@ -1,6 +1,6 @@
 <template>
     <div ref="CloudRef" id="cloud"
-         style="width: 90%; height: 600px; margin: 0 auto"
+         style="width: 90%; height: 1000px; margin: 0 auto"
          class="CloudShow"></div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="TcMap">
-        <h1>苏州地图--svg地图</h1>
+        <h1>苏州地图</h1>
         <div ref="EcharMapRef" id="map-box" style="width:700px; height:500px"></div>
     </div>
 </template>

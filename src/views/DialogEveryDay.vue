@@ -1,12 +1,17 @@
 <template>
+    <body>
     <div class="DialogEveryDay" @contextmenu.prevent ref="ref1">
-        <van-button  hairline round color="linear-gradient(to right, #ff6034, #ee0a24)" type="primary" @click.once="Dia1">生活</van-button>
-        <van-button  hairline round color="linear-gradient(to right, #24EBFA, #3E1CFA)" type="primary" @click="Dia2">睡眠</van-button>
-        <van-button  hairline round color="linear-gradient(to right, #A5FAA7, #24B92B)" type="primary" @click.right="Dia3">交互</van-button>
-        <van-button  hairline round color="linear-gradient(to right, #FA8DE5, #E61AFA)" type="primary" @click.space="Dia4">踏青</van-button>
+        <van-config-provider :theme-vars="themeVars">
+            <van-button  hairline round color="linear-gradient(to right, #ff6034, #ee0a24)" type="primary" @click.once="Dia1">生活</van-button>
+            <van-button  hairline round color="linear-gradient(to right, #24EBFA, #3E1CFA)" type="primary" @click="Dia2">睡眠</van-button>
+            <van-button  hairline round color="linear-gradient(to right, #A5FAA7, #24B92B)" type="primary" @click.right="Dia3">交互</van-button>
+            <van-button  hairline round color="linear-gradient(to right, #FA8DE5, #E61AFA)" type="primary" @click.space="Dia4">踏青</van-button>
+            <van-button  hairline round type="primary" >全局</van-button>
+        </van-config-provider>
+        <van-button  hairline round  type="primary" @click="BlackStyle">降维</van-button>
         <swiper class="mySwiper" :modules="modules" :pagination="{ clickable:true }">
             <swiper-slide>
-              <img src="../assets/images/swiper/lbt1.png" alt="">
+                <img src="../assets/images/swiper/lbt1.png" alt="">
             </swiper-slide>
             <swiper-slide>
                 <img src="../assets/images/swiper/R00.png" alt="">
@@ -17,10 +22,25 @@
             <swiper-slide>
                 <img src="../assets/images/swiper/lbt5.png" alt="">
             </swiper-slide>
+            <swiper-slide>
+                <img src="../assets/images/swiper/R05.png" alt="">
+            </swiper-slide>
         </swiper>
-
-
+        <lazy-component>
+        <swiper class="mySwiper2" :modules="modules" :pagination="{ clickable:true }">
+            <swiper-slide>
+                <img src="../assets/images/swiper/R04_Rainbow.png" alt="">
+            </swiper-slide>
+            <swiper-slide>
+                <img src="../assets/images/swiper/R04_Blue.png" alt="">
+            </swiper-slide>
+            <swiper-slide>
+                <img src="../assets/images/swiper/R04_Green.png" alt="">
+            </swiper-slide>
+        </swiper>
+        </lazy-component>
     </div>
+    </body>
 
 </template>
 
@@ -31,7 +51,6 @@
     import { Pagination } from 'swiper';
     import 'swiper/css';
     import 'swiper/css/pagination';
-    import * as echarts from 'echarts';
     //Dialog({ message: '小助手启动' });
     export default {
         name: "DialogEveryDay",
@@ -44,7 +63,13 @@
         },
         setup() {
             const show = ref(false);
-            return { show };
+            const themeVars = {
+                buttonPrimaryBorderColor: '#07c160',
+                buttonPrimaryBackgroundColor: '#636363',
+            };
+            return {
+                show,themeVars
+            }
         },
         data () {
             return {
@@ -55,7 +80,7 @@
         methods: {
             Dia1() {
                 Dialog.alert({
-                    message: '生命远不止连轴转和忙到极限，人类的体验远比这辽阔、丰富得多。',
+                    message: '生命远不止连轴转和忙到极限，人类的体验远比这辽阔、丰富得多。创造内心的奇迹，不断向外探索，生命在于运动！',
                     theme: 'round-button',
                 }).then(() => {
                     // on close
@@ -85,19 +110,19 @@
                     // on close
                 });
             },
-            ShowCloud(){
-                const main = this.$refs.CloudRef;
-                const myChart = echarts.init(main);
-
-
-
+            BlackStyle(){
+                document.body.classList.toggle("dark");
             }
         },
     }
 </script>
 
 <style scoped>
-
     img{width: 95%}
-
+    :root {
+        --van-primary-color: var(--van-blue);
+        --van-button-primary-background-color: #636363;
+        --van-background-color: var(--van-gray-1);
+        --van-gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
+    }
 </style>
