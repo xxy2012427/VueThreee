@@ -20,6 +20,7 @@
     "swiper": "^8.1.6",
     "vant": "^3.6.4",
     "vue": "^3.2.38",
+    "vue-baberrage": "^3.2.4",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {

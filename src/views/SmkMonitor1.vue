@@ -1,6 +1,6 @@
 <template>
 
-    <div class="smkmonitor1">
+    <div :style="background" class="smkmonitor1">
 
         <p v-show="showflag">
             <button @click="postInfo">实时交易更新</button>
@@ -9,8 +9,8 @@
             </li>
          </p>
 
-        <div ref="EcharRef" id="e1" style="width: 600px;height:400px;"></div>
-        <div ref="EcharStackedLine" id="e2" style="width: 700px;height:400px;"></div>
+        <div class="div1" ref="EcharRef" id="e1" style="width: 600px;height:400px;"></div>
+        <div class="div2" ref="EcharStackedLine" id="e2" style="width: 600px;height:400px;"></div>
 
     </div>
 </template>
@@ -38,9 +38,24 @@
                 mon3list1:['脱机', '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'],
                 mon3list2:['0',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                 mon3list3:['0',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                background: {
+                    // 背景图片地址
+                    backgroundImage: new URL("../assets/images/bg1.jpg", import.meta.url).href,
+                    // 背景图片是否重复
+                    backgroundRepeat: 'no-repeat',
+                    // 背景图片大小
+                    backgroundSize: 'cover',
+                    // 背景颜色
+                    //backgroundColor: '#58fa99',
+                    // 背景图片位置
+                    //backgroundPosition: 'center top',
+                    height: "100vh",
+                    width:"100%",
+                }
             }
         },
         mounted() {
+            document.body.style.backgroundImage = "url('../src/assets/images/bg1.jpg')";
             this.showorders();
             this.postInfo();
             this.postInfo2();
@@ -236,7 +251,9 @@
                 option2 && myChart2.setOption(option2);
 
             },
-
+            getImages() {
+                return new URL(`/src/assets/images/bg1.jpg`, import.meta.url).href;
+            }
 
 
         },
@@ -246,11 +263,30 @@
             // this.stopColor()
             this.timeInter = null;
             this.$toast.clear();
+            document.body.style.backgroundImage = ''
         },
     }
 
 </script>
 
 <style scoped>
-
+    .div1{
+        width:40%;
+        height:400px;
+        background-color: #fffbca;
+        display:inline-block;
+    }
+    .div2{
+        width:40%;
+        height:400px;
+        background-color: #f7f1ee;
+        display:inline-block;
+    }
+    .div3{
+        float:left; width:200px; height:200px;
+    }
+    .html,.body{
+        margin:0;
+        padding:0;
+    }
 </style>

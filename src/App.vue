@@ -6,6 +6,8 @@
   import ListenOne from './views/ListenOne.vue'
   import CloudShow from './views/Echarts/CloudShow.vue'
 
+
+
 </script>
 
 <template>
@@ -17,6 +19,7 @@
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/music">music</RouterLink>
+      <RouterLink to="/bg/one">背景图片</RouterLink>
     </p>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -28,6 +31,8 @@
         <RouterLink to="/smkmonitor1">数据展示</RouterLink>
         <RouterLink to="/cloud/one">云</RouterLink>
         <RouterLink to="/map/one">苏州地图</RouterLink>
+        <RouterLink to="/baberrage/one">弹幕世界</RouterLink>
+
       </nav>
     </div>
   </header>
@@ -97,5 +102,15 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+  html{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  }
+
 }
 </style>

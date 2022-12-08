@@ -44,4 +44,7 @@ h3 {
     text-align: left;
   }
 }
+.greetings2 {
+  background: #ff363d;
+}
 </style>

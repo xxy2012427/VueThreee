@@ -15,6 +15,7 @@ import { Dialog } from 'vant';
 import { Toast } from 'vant';
 import { Overlay } from 'vant';
 import { ConfigProvider,Lazyload } from 'vant';
+import { vueBaberrage } from 'vue-baberrage'
 
 import './assets/main.css'
 import "./assets/theme/index.css"
@@ -49,5 +50,6 @@ app.use(ConfigProvider);
 app.use(Lazyload, {
     lazyComponent: true,
 });
+app.use(vueBaberrage);
 app.config.globalProperties.$echarts = echarts;
 app.mount('#app');

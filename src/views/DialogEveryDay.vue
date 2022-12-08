@@ -8,7 +8,7 @@
             <van-button  hairline round color="linear-gradient(to right, #FA8DE5, #E61AFA)" type="primary" @click.space="Dia4">踏青</van-button>
             <van-button  hairline round type="primary" >全局</van-button>
         </van-config-provider>
-        <van-button  hairline round  type="primary" @click="BlackStyle">降维</van-button>
+
         <swiper class="mySwiper" :modules="modules" :pagination="{ clickable:true }">
             <swiper-slide>
                 <img src="../assets/images/swiper/lbt1.png" alt="">
@@ -124,5 +124,16 @@
         --van-button-primary-background-color: #636363;
         --van-background-color: var(--van-gray-1);
         --van-gradient-red: linear-gradient(to right, #ff6034, #ee0a24);
+    }
+    div2{
+        display:inline-block; width:500px; height:500px;
+    }
+    html{-webkit-filter: grayscale(.95)}
+    div3 {
+        width: 100%;
+        height: 100%;
+        background-color: #c1c1c1;
+        position: fixed;
+
     }
 </style>

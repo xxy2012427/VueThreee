@@ -52,6 +52,16 @@ const router = createRouter({
       name: 'Tcmap',
       component: () => import('../views/Echarts/Tcmap.vue')
     },
+    {
+      path: '/baberrage/one',
+      name: 'baberrage1',
+      component: () => import('../views/Baberrage.vue')
+    },
+    {
+      path: '/bg/one',
+      name: 'bg',
+      component: () => import('../views/bg.vue')
+    },
   ]
 })
 
