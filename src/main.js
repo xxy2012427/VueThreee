@@ -14,7 +14,7 @@ import { Col, Row } from 'vant';
 import { Dialog } from 'vant';
 import { Toast } from 'vant';
 import { Overlay } from 'vant';
-import { ConfigProvider,Lazyload } from 'vant';
+import { ConfigProvider,Lazyload,DropdownMenu, DropdownItem } from 'vant';
 import { vueBaberrage } from 'vue-baberrage'
 
 import './assets/main.css'
@@ -50,6 +50,8 @@ app.use(ConfigProvider);
 app.use(Lazyload, {
     lazyComponent: true,
 });
+app.use(DropdownMenu);
+app.use(DropdownItem);
 app.use(vueBaberrage);
 app.config.globalProperties.$echarts = echarts;
 app.mount('#app');

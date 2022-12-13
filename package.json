@@ -13,6 +13,7 @@
   "dependencies": {
     "aplayer": "^1.10.1",
     "axios": "^1.1.2",
+    "dplayer": "^1.27.0",
     "echarts": "^5.4.0",
     "echarts-wordcloud": "^2.0.0",
     "jquery": "^3.6.1",

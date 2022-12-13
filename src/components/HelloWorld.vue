@@ -11,8 +11,7 @@ defineProps({
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
-      This project use
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a> + Flask
+      <a href="https://vuejs.org/" target="_blank" rel="noopener">This project use Vue 3 </a>+ Flask
     </h3>
     <p v-show="showTime=false">
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +

@@ -8,19 +8,38 @@
                 {{ key }}: {{ value }}
             </li>
          </p>
-
-        <div class="div1" ref="EcharRef" id="e1" style="width: 600px;height:400px;"></div>
-        <div class="div2" ref="EcharStackedLine" id="e2" style="width: 600px;height:400px;"></div>
+        <div class="backImg" style="width: 600px;height:400px;">
+            <div class="div1" ref="EcharRef" id="e1" style="width:100%;height:100%;"></div>
+        </div>
+        <div class="month" style="width: 600px;height:50px;">
+            <van-dropdown-menu>
+                <van-dropdown-item v-model="value1" teleport="body" style="width: 600px;height:50px;" :options="option1" @change="changeMonth" />
+            </van-dropdown-menu>
+        </div>
+        <div class="backImg2" style="width: 600px;height:400px;">
+            <div class="div2" ref="EcharStackedLine" id="e2" style="width:100%;height:100%;"></div>
+        </div>
 
     </div>
 </template>
 
 <script>
-    import axios from "axios"
+    import axios from "axios";
+    import { ref } from 'vue';
     import * as echarts from 'echarts';
-
+    import qs from 'qs';
     export default {
         name: "SmkMonitor1",
+        setup(){
+            const value1 = ref(0);
+            const option1 = [
+                { text: '202211', value: 0 },
+                { text: '202210', value: 1 },
+            ];
+            return {
+                value1,option1
+            }
+        },
         data () {
             return{
                 showflag:false,
@@ -51,7 +70,8 @@
                     //backgroundPosition: 'center top',
                     height: "100vh",
                     width:"100%",
-                }
+                },
+                monthContent:'202211',
             }
         },
         mounted() {
@@ -63,7 +83,7 @@
             this.postInfo3();
             this.timeInter = setInterval(() => {
                 this.postInfo()  // methods里的方法
-            }, 60000)
+            }, 300000)  //设置为5分钟
         },
         methods: {
             postInfo() {
@@ -99,7 +119,9 @@
                 })
             },
             postInfo3() {
-                axios.post('/api/monitor3').then((res) => {
+                const monstC= this.monthContent;
+                const data = qs.stringify({month:monstC});
+                axios.post('/api/monitor3',data).then((res) => {
                     this.mon3list1=res.data.data.list1;
                     this.mon3list2=res.data.data.list2;
                     this.mon3list3=res.data.data.list3;
@@ -116,17 +138,34 @@
                 var option;
                 option = {
                 title: {
-                    text: '实时交易量'
+                    text: '实时交易量',
+                    textStyle: {
+                        color: "#fff9ca",
+                    }
                 },
                 legend: {//图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
-                        data: ['昨日','今日']
+                    data: ['昨日','今日'],
+                    textStyle: {
+                        color: "#fff9ca",
+                    }
                 },
                 xAxis: {
                     type: 'category',
-                        data: ['脱机', '一卡通', '银联','苏周到','支付宝']
+                    data: ['脱机', '一卡通', '银联','苏周到','支付宝'],
+                    axisLabel : {
+                        fontSize: 16,
+                        color : "#fff9ca"
+                    },
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    axisLine:{
+                    },
+                    axisLabel:{
+                        textStyle:{
+                            color:'#fff9ca',
+                        }
+                    },
                 },
                 series: [
                     {
@@ -139,7 +178,8 @@
                                 position: 'top'
                             },
                             formatter: '{@value}'
-                        }
+                        },
+                        showBackground: false
                     },
                     {
                         name:'今日',
@@ -151,7 +191,8 @@
                                 position: 'top'
                             },
                             formatter: '{@value}'
-                        }
+                        },
+                        showBackground: false
                     }
                 ]
             };
@@ -162,7 +203,7 @@
                 const main2 = this.$refs.EcharStackedLine;
                 var myChart2 = echarts.init(main2);
                 var option2;
-                var seriesData=[];
+                const seriesData=[];
                 seriesData.push(this.product);
                 seriesData.push(this.mon3list1);
                 seriesData.push(this.mon3list2);
@@ -174,6 +215,10 @@
                         tooltip: {
                             trigger: 'axis',
                             showContent: false
+                        },
+                        textStyle:{
+                            fontSize: 16,
+
                         },
                         dataset: {
                             source:
@@ -252,13 +297,17 @@
 
             },
             getImages() {
-                return new URL(`/src/assets/images/bg1.jpg`, import.meta.url).href;
-            }
+                return new URL(`/src/assets/images/kshbg2.jpg`, import.meta.url).href;
+            },
+            changeMonth(value){
+                this.monthContent=this.option1[value].text;
+                this.postInfo3();
+            },
 
 
         },
         beforeUnmount() {
-            console.log('定时器释放:', this.timeInter)
+            console.log('定时器释放:', this.timeInter);
             clearInterval(this.timeInter);
             // this.stopColor()
             this.timeInter = null;
@@ -273,7 +322,6 @@
     .div1{
         width:40%;
         height:400px;
-        background-color: #fffbca;
         display:inline-block;
     }
     .div2{
@@ -282,11 +330,21 @@
         background-color: #f7f1ee;
         display:inline-block;
     }
+    .month2{
+        display:inline-block;
+        background-color: #f7f1ee;
+    }
     .div3{
         float:left; width:200px; height:200px;
     }
     .html,.body{
         margin:0;
         padding:0;
+    }
+    .backImg3{
+        background: url('../assets/images/bg1.jpg');
+    }
+    .backImg2{
+        background: url('../assets/images/bg2.png');
     }
 </style>
