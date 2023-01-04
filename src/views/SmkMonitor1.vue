@@ -19,6 +19,11 @@
         <div class="backImg2" style="width: 600px;height:400px;">
             <div class="div2" ref="EcharStackedLine" id="e2" style="width:100%;height:100%;"></div>
         </div>
+        <div>
+            <select v-model="role" style="width: 600px;height:50px;">
+                <option class="selectoption" v-for="role in roleList" v-bind:value="role.value">{{role.label}}</option>
+            </select>
+        </div>
 
     </div>
 </template>
@@ -33,8 +38,9 @@
         setup(){
             const value1 = ref(0);
             const option1 = [
-                { text: '202211', value: 0 },
-                { text: '202210', value: 1 },
+                { text: '202212', value: 0 },
+                { text: '202211', value: 1 },
+                { text: '202210', value: 2 },
             ];
             return {
                 value1,option1
@@ -71,7 +77,9 @@
                     height: "100vh",
                     width:"100%",
                 },
-                monthContent:'202211',
+                monthContent:'202212',
+                role:'1',
+                roleList:[{value:'1',label:'我是游客'},{value:'2',label:'我是普通用户'},{value:'3',label:'我是管理员'}],
             }
         },
         mounted() {
@@ -346,5 +354,10 @@
     }
     .backImg2{
         background: url('../assets/images/bg2.png');
+    }
+    .selectoption{
+        text-align-last: center;
+        padding:0 10%;
+        font-size: 22px;
     }
 </style>

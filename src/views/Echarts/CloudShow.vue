@@ -2,12 +2,17 @@
     <div ref="CloudRef" id="cloud"
          style="width: 90%; height: 1000px; margin: 0 auto"
          class="CloudShow"></div>
+
+
+       <RouterView />
+       <cloudblockone></cloudblockone>
 </template>
 
 <script>
     import * as echarts from 'echarts';
     import 'echarts-wordcloud';
-
+    import cloudblockone from './CloudBlockOne.vue';
+    import { RouterLink, RouterView } from 'vue-router';
     export default {
         name: "CloudShow",
         data () {
@@ -81,10 +86,7 @@
                                 ].join(',') + ')';
                               }
                             },
-                            data: [{value: '366',name: 'Free Style',
-                                  // Style of single text
-                                  //textStyle: {}
-                                  },
+                            data: [{value: '366',name: 'Free Style'},
                                   {value: '100', name: '灵'},
                                   {value: '129', name: 'OPPO'},
                                   {value: '99', name: 'HONOR'},

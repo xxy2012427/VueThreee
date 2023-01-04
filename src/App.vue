@@ -5,7 +5,7 @@
   import MusicView from './views/Music.vue'
   import ListenOne from './views/ListenOne.vue'
   import CloudShow from './views/Echarts/CloudShow.vue'
-
+  import cloudblockone from './views/Echarts/CloudBlockOne.vue'
 
 
 </script>
@@ -20,6 +20,7 @@
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/music">music</RouterLink>
       <RouterLink to="/bg/one">背景图片</RouterLink>
+      <ListenOne>  </ListenOne>
     </p>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -30,6 +31,7 @@
         <RouterLink to="/dialogOne">每日提示</RouterLink>
         <RouterLink to="/smkmonitor1">数据展示</RouterLink>
         <RouterLink to="/cloud/one">云</RouterLink>
+        <RouterLink to="/cloud/blockone">云2</RouterLink>
         <RouterLink to="/map/one">苏州地图</RouterLink>
         <RouterLink to="/baberrage/one">弹幕世界</RouterLink>
 
@@ -38,7 +40,8 @@
   </header>
 
   <RouterView />
-  <ListenOne>  </ListenOne>
+
+
 </template>
 
 <style scoped>

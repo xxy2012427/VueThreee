@@ -48,6 +48,11 @@ const router = createRouter({
       component: () => import('../views/Echarts/CloudShow.vue')
     },
     {
+      path: '/cloud/blockone',
+      name: 'cloudblockone',
+      component: () => import('../views/Echarts/CloudBlockOne.vue')
+    },
+    {
       path: '/map/one',
       name: 'Tcmap',
       component: () => import('../views/Echarts/Tcmap.vue')
